@@ -1,5 +1,8 @@
-provider "aws" {}
-
+provider "aws" {
+  region     = "eu-west"
+  access_key = var.aws_access_key 
+  secret_key = var.aws_secret_key 
+}
 terraform {
   backend "s3" {
     bucket  = "nginx-web-server-backend-state"
