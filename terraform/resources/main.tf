@@ -15,20 +15,28 @@ module "vpc" {
 }
 module "internet-gateway" {
   source = "./modules/internet-gateway"
-  vpc_id = "${module.vpc.vpc_id}"
+  vpc_id = module.vpc.vpc_id
 }
 module "route-table" {
-  source = "./modules/route-table"
-  vpc_id = "${module.vpc.vpc_id}" 
-  internet_gateway_id = "${module.internet-gateway.internet_gateway_id}"
+  source              = "./modules/routes-table"
+  vpc_id              = module.vpc.vpc_id
+  internet_gateway_id = module.internet-gateway.internet_gateway_id
 }
 module "subnet" {
-  source = "./modules/subnet"
-  vpc_id = "${module.vpc.vpc_id}"
-  cidr_block = "${module.vpc.vpc_cidr_block}"
-  route_table_id = "${module.route-table.route_table_id}"
+  source            = "./modules/subnets"
+  vpc_id            = module.vpc.vpc_id
+  cidr_block        = module.vpc.vpc_cidr_block
+  route_table_id    = module.route-table.route_table_id
+  availability_zone = var.availability_zone
 }
 module "security-groups" {
-  source = "./modules/security-group"
-  vpc_id = "${module.vpc.vpc_id}"
+  source = "./modules/security-groups"
+  vpc_id = module.vpc.vpc_id
+}
+
+module "webserver" {
+  source            = "./modules/webserver"
+  subnet_id         = module.subnet.public_subnets_id
+  security_group_id = module.security-groups.webserver_security_group_id
+  availability_zone = var.availability_zone
 }

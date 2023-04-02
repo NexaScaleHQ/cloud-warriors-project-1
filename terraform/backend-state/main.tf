@@ -1,14 +1,17 @@
-provider "aws" {}
+provider "aws" {
+  region = "us-east-1"
+  
+}
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "nginx-web-server-backend-state"
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  # lifecycle {
+  #   prevent_destroy = true
+  # }
 
   versioning {
-    enabled = true
+    enabled = false
   }
 
   server_side_encryption_configuration {

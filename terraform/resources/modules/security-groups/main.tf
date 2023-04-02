@@ -35,6 +35,6 @@ resource "aws_security_group" "allow-web-security-group" {
   }
 
   tags = {
-    Name = "allow-web"
+    Name = "${var.env-prefix}-allow-web"
   }
 }

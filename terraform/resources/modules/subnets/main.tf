@@ -8,10 +8,10 @@
 resource "aws_subnet" "public_subnets" {
   vpc_id                  = var.vpc_id
   cidr_block              = var.vpc_cidr_block
-  availability_zone       = "us-east-1a"
+  availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
   tags = {
-    Name = "web-server-public-subnet"
+    Name = "${var.env_prefix}-web-server-public-subnet"
   }
 }
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "public_subnets" {
 */
 
 resource "aws_route_table_association" "public" {
-  subnet_id = element(aws_subnet.public_subnets.id, count.index)
+  subnet_id = aws_subnet.public_subnets.id
 
   route_table_id = "${var.route_table_id}"
 }

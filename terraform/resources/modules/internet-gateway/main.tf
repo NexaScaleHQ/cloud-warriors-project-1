@@ -7,6 +7,6 @@
 resource "aws_internet_gateway" "web-server-igw" {
   vpc_id = "${var.vpc_id}"
   tags   = {
-    Name = "web-server-igw"
+    Name = "${var.env_prefix}-web-server-igw"
   }
 }

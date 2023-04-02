@@ -17,6 +17,6 @@ resource "aws_route_table" "web-server-rt" {
   }
 
   tags = {
-    Name = "web-server-rt"
+    Name = "${var.env_prefix}-web-server-rt"
   }
 }
