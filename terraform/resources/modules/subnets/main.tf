@@ -5,11 +5,11 @@
 * to go through, and aren't shielded by NAT Gateway.
 */
 
-resource "aws_subnet" "public_subnets" {
+resource "aws_subnet" "subnet" {
   vpc_id                  = var.vpc_id
   cidr_block              = var.vpc_cidr_block
   availability_zone       = var.availability_zone
-  map_public_ip_on_launch = true
+  # map_public_ip_on_launch = true
   tags = {
     Name = "${var.env_prefix}-web-server-public-subnet"
   }
@@ -20,7 +20,7 @@ resource "aws_subnet" "public_subnets" {
 */
 
 resource "aws_route_table_association" "public" {
-  subnet_id = aws_subnet.public_subnets.id
+  subnet_id = aws_subnet.subnet.id
 
   route_table_id = var.route_table_id
 }

@@ -1,5 +1,5 @@
 variable "cidr_block" {
-  default = "172.0.0.0/16"
+  default = "10.0.1.0/24"
 }
 variable "env_prefix" {
   default = "dev"

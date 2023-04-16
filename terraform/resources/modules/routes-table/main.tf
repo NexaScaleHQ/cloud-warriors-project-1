@@ -11,10 +11,10 @@ resource "aws_route_table" "web-server-rt" {
     gateway_id = var.internet_gateway_id
   }
 
-  route {
-    ipv6_cidr_block = "::/0"
-    gateway_id      = var.internet_gateway_id
-  }
+  # route {
+  #   ipv6_cidr_block = "::/0"
+  #   gateway_id      = var.internet_gateway_id
+  # }
 
   tags = {
     Name = "${var.env_prefix}-web-server-rt"
