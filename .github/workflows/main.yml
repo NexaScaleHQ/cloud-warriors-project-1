@@ -18,7 +18,7 @@ jobs:
         with:
           aws-access-key-id: ${{ AKIAWBPQPR5DOM6HKGUP }}
           aws-secret-access-key: ${{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}}
-          aws-region: us-east-1
+          aws-region: us-west-1
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
@@ -39,6 +39,6 @@ jobs:
         run: terraform apply tfplan
         env:
           TF_INPUT: 0
-          TF_VAR_aws_region: us-east-1
+          TF_VAR_aws_region: us-west-1
         with:
           args: "-auto-approve"

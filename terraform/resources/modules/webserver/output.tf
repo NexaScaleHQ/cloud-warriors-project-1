@@ -1,3 +1,3 @@
-output "ec2_public_id" {
-  value = "${aws_instance.nginx-instance.public_id}"
+output "ec2_public_ip" {
+  value = aws_instance.nginx-instance.public_ip
 }

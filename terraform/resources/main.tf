@@ -1,15 +1,18 @@
-provider "aws" {
-  region     = "eu-west"
-  access_key = var.aws_access_key 
-  secret_key = var.aws_secret_key 
-}
+provider "aws" {}
+
 terraform {
   backend "s3" {
-    bucket  = "nginx-web-server-backend-state"
-    key     = "web-server/development/terraform.tfstate"
-    region  = "us-east-1"
+    bucket  = "team-warriors-web-server-backend-state"
+    key     = "team-warriors-web-server/development/terraform.tfstate"
+    region  = "eu-west-1"
     encrypt = true
   }
+  required_providers {
+  aws = {
+    source  = "hashicorp/aws"
+    version = "~> 4.0"
+  }
+}
 }
 
 # Import modules
@@ -28,7 +31,7 @@ module "route-table" {
 module "subnet" {
   source            = "./modules/subnets"
   vpc_id            = module.vpc.vpc_id
-  cidr_block        = module.vpc.vpc_cidr_block
+  vpc_cidr_block        = module.vpc.vpc_cidr_block
   route_table_id    = module.route-table.route_table_id
   availability_zone = var.availability_zone
 }
@@ -40,6 +43,6 @@ module "security-groups" {
 module "webserver" {
   source            = "./modules/webserver"
   subnet_id         = module.subnet.public_subnets_id
-  security_group_id = module.security-groups.webserver_security_group_id
+  security_group_id = module.security-groups.security_group_id
   availability_zone = var.availability_zone
 }

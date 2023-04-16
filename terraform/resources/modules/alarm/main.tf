@@ -11,11 +11,11 @@ resource "aws_cloudwatch_metric_alarm" "cost-optimization-alarm" {
   dimensions = {
     ServiceName = "Amazon Elastic Compute Cloud - Compute",
     Currency    = "USD",
-    Instance_id =  var.instance_type
+    Instance_id = var.instance_type
   }
 
   alarm_description = "This alarm monitors the estimated charges for Amazon EC2 instances and triggers if the cost goes above $0.01 per day."
 
   alarm_actions = var.alarm_action
- 
+
 }

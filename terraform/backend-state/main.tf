@@ -1,25 +1,15 @@
-provider "aws" {
-  region     = "eu-west"
-  access_key = var.aws_access_key 
-  secret_key = var.aws_secret_key 
+provider "aws" {}
+
+resource "aws_s3_bucket" "warriror_terraform_state" {
+  bucket = "team-warriors-web-server-backend-state"
 }
 
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "nginx-web-server-backend-state"
+resource "aws_s3_bucket_server_side_encryption_configuration" "team_warriors_s3_bucket_server_side_encryption" {
+  bucket = aws_s3_bucket.warriror_terraform_state.id
 
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
-
-  versioning {
-    enabled = false
-  }
-
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"       
-      }
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "AES256"
     }
   }
 }
