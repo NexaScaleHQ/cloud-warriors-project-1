@@ -2,7 +2,6 @@ variable "instance_type" {
   description = "The instance id to be monitored"
   default     = "t2.micro"
 }
-# variable "subnet_id" {}
 variable "availability_zone" {}
 variable "env_prefix" {
   default = "dev"

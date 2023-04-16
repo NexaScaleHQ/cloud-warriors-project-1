@@ -26,8 +26,6 @@ resource "aws_instance" "nginx-instance" {
     device_index         = 0
   }
 
-  # associate_public_ip_address = true
-
   user_data = file("ngnix-server-script.sh")
 
   tags = {

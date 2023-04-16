@@ -51,7 +51,6 @@ module "elastic-ip" {
 }
 module "webserver" {
   source               = "./modules/webserver"
-  # subnet_id            = module.subnet.public_subnet_id
   network_interface_id = module.network-interface.network_interface_id
   availability_zone    = var.availability_zone
 }
