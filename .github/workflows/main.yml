@@ -1,4 +1,4 @@
-name: Terraform Apply
+name: "Terraform Apply"
 
 on:
   push:
@@ -19,11 +19,13 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: us-west-1
-
+      -  name: Change directory
+         run: cd cloud_warriors-project-1
+         working-directory: cloud_warriors-project-1
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: "4.60.0"
+          terraform_version: "1.0.1"
 
       - name: Terraform init
         run: terraform init
@@ -36,9 +38,8 @@ jobs:
 
       - name: Terraform apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply tfplan
+        run: terraform apply tfplan -auto-approve
         env:
           TF_INPUT: 0
           TF_VAR_aws_region: us-west-1
-        with:
-          args: "-auto-approve"
+    
