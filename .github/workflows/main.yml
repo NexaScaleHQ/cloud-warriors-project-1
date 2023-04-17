@@ -1,45 +1,43 @@
-name: "Terraform Apply"
+name: "Terraform"
 
 on:
-  push:
-    branches:
-      - main
+ push:
+  branches:
+  -main
 
-jobs:
-  terraform:
-    name: Terraform
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  jobs:
+   terraform:
+   name: "Terraform"
+   runs-on: ubuntu-latest
+   env:
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRETS_ACCESS_KEY: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
+  defaults:
+    run:
+     working-directory: cloud-warriors-project-1
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws-region: us-west-1
-      -  name: Change directory
-         run: cd cloud_warriors-project-1
-         working-directory: cloud_warriors-project-1
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: "1.0.1"
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with: 
+       terraform_version: 1.0.1
+       terraform_wrapper: false
 
-      - name: Terraform init
-        run: terraform init
+    - name: Terraform Format
+      id: fmt
+      run: terraform fmt -check
 
-      - name: Terraform validate
-        run: terraform validate
+    - name: Terraform Init
+      id: init
+      run: terraform init        
 
-      - name: Terraform plan
-        run: terraform plan -out=tfplan
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
 
-      - name: Terraform apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply tfplan -auto-approve
-        env:
-          TF_INPUT: 0
-          TF_VAR_aws_region: us-west-1
+    - name: Terraform Apply
+      id: init
+      run: terraform apply -auto-approve     
     
