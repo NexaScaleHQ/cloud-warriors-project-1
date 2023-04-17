@@ -3,19 +3,19 @@ name: "Terraform"
 on:
  push:
   branches:
-  -main
+   - main
 
-  jobs:
+jobs:
    terraform:
-   name: "Terraform"
-   runs-on: ubuntu-latest
-   env:
-    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    AWS_SECRETS_ACCESS_KEY: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
-  defaults:
-    run:
-     working-directory: cloud-warriors-project-1
-  steps:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRETS_ACCESS_KEY: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
+    defaults:
+     run:
+      working-directory: cloud-warriors-project-1
+    steps:
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -38,6 +38,6 @@ on:
       run: terraform plan -no-color
 
     - name: Terraform Apply
-      id: init
+      id: apply
       run: terraform apply -auto-approve     
     
