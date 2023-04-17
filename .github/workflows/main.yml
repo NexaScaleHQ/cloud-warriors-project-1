@@ -14,7 +14,7 @@ jobs:
       AWS_SECRETS_ACCESS_KEY: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
     defaults:
      run:
-      working-directory: cloud-warriors-project-1
+      working-directory: terraform
     steps:
     - name: Checkout
       uses: actions/checkout@v2
