@@ -10,4 +10,4 @@ variable "security_group_allow_web" {}
 variable "public_key_path" {
   default = "~/.ssh/id_rsa.pub"
 }
-variable "private_subnets" {}
+variable "public_subnets" {}

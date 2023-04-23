@@ -39,7 +39,7 @@ module "bastion" {
 }
 module "webserver" {
   source                   = "./modules/webserver"
-  private_subnets          = module.subnet.private_subnets
+  public_subnets          = module.subnet.public_subnets
   security_group_allow_web = module.security-groups.security_group_allow_web
 }
 module "loadbalancer" {
@@ -49,3 +49,7 @@ module "loadbalancer" {
   public_subnets    = module.subnet.public_subnets
   vpc_id            = module.vpc.vpc_id
 }
+
+# module "alarm" {
+#   source = "./modules/alarm"
+# }

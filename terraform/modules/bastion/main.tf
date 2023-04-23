@@ -14,7 +14,7 @@ data "aws_ssm_parameter" "linux2_ami" {
 /*** Launch a bastion instance we can use to gain access to the private subnets of* this availabilty zone.*/
 
 resource "aws_instance" "bastion" {
-  ami                         = data.aws_ssm_parameter.linux2_ami.value
+  ami                         = "ami-00aa9d3df94c6c354"
   key_name                    = aws_key_pair.bastion.key_name
   instance_type               = "t2.micro"
   associate_public_ip_address = true
