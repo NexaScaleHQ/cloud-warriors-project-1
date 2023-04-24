@@ -28,8 +28,8 @@ module "route-table" {
   nat_gateway_id      = module.nat-gateway.nat_gateway_id
 }
 module "security-groups" {
-  source                    = "./modules/security-groups"
-  vpc_id                    = module.vpc.vpc_id
+  source = "./modules/security-groups"
+  vpc_id = module.vpc.vpc_id
 }
 module "bastion" {
   source                    = "./modules/bastion"
@@ -39,7 +39,7 @@ module "bastion" {
 }
 module "webserver" {
   source                   = "./modules/webserver"
-  public_subnets          = module.subnet.public_subnets
+  public_subnets           = module.subnet.public_subnets
   security_group_allow_web = module.security-groups.security_group_allow_web
 }
 module "loadbalancer" {
