@@ -20,7 +20,7 @@ jobs:
             - uses: actions/checkout@v2
             - uses: hashicorp/setup-terraform@v1
             - name: Terraform fmt
-              run: cd && terraform fmt -check
+              run: terraform fmt -check
 
   terraform:
     name: 'Terraform'
@@ -40,16 +40,16 @@ jobs:
       uses: hashicorp/setup-terraform@v1
     
     - name: Terraform initialize
-      run: cd && terraform init 
+      run: terraform init 
       env:
-        TF_ACTION_WORKING_DIR: 'terraform'
+        TF_ACTION_WORKING_DIR: './'
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     - name: Terraform Plan
       run: terraform plan -input=false
       env:
-        TF_ACTION_WORKING_DIR: 'terraform'
+        TF_ACTION_WORKING_DIR: '.'
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     
@@ -57,6 +57,6 @@ jobs:
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
       env:
-        TF_ACTION_WORKING_DIR: './terraform'
+        TF_ACTION_WORKING_DIR: '.'
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
