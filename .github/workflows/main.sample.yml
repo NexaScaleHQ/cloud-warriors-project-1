@@ -1,0 +1,62 @@
+name: CI/CD to deploy app
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+        branches:  [ main ]
+  
+permissions: read-all
+env:
+  FORCE_COLOR: 3
+  AWS_REGION: eu-west-1
+  TF_KEY: terraform-state.tfstate
+
+jobs:
+  check-terraform-format:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - uses: actions/checkout@v2
+            - uses: hashicorp/setup-terraform@v1
+            - name: Terraform fmt
+              run: cd && terraform fmt -check
+
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+    
+    - name: Terraform initialize
+      run: terraform init 
+      env:
+        TF_ACTION_WORKING_DIR: './terraform'
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Terraform Plan
+      run: terraform plan -input=false
+      env:
+        TF_ACTION_WORKING_DIR: './terraform'
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    
+    - name: Terraform Apply
+      #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
+      env:
+        TF_ACTION_WORKING_DIR: './terraform'
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
