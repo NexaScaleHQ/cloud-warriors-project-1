@@ -293,7 +293,7 @@ resource "aws_cloudwatch_metric_alarm" "cost-optimization-alarm" {
 ```
   * This alarm will be used to monitor the estimated charges for Amazon EC2 instances and triggers if the cost goes above $0.01 per day.
 
-```
+
 # Live Server
 
 [live link](http://3.252.28.105/)
@@ -301,6 +301,7 @@ resource "aws_cloudwatch_metric_alarm" "cost-optimization-alarm" {
 ![page](/assests/page.png)
 
 # How to Run/Contribute
+
 ### START HERE: Initialize the instance
 
 - Navigate to the terraform backend-state folder. `cd terraform`.
