@@ -10,8 +10,8 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     env:
-      AWS_ACCESS_KEY_ID: "AKIAWBPQPR5DOM6HKGUP"
-      AWS_SECRET_ACCESS_KEY: "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"
+      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       AWS_REGION: "eu-west-1"
     defaults:
      run:
@@ -36,9 +36,9 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan -no-color
+      run: terraform plan 
 
     - name: Terraform Apply
       id: apply
-      run: terraform apply -auto-approve     
+      run: terraform apply -auto-approve
     
