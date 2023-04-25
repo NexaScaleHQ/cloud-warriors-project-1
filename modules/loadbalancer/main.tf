@@ -1,6 +1,6 @@
 /***Load Balancer to be attached to the ECS cluster to distribute the load among instances*/
 
-resource "aws_elb" "ngnix_elb" {
+resource "aws_elb" "ngnix-elb" {
   subnets                   = [for subnet in var.public_subnets : subnet.id]
   cross_zone_load_balancing = true
   security_groups           = [var.security_group_lb]
