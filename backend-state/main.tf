@@ -1,3 +1,4 @@
+provider "aws" {}
 resource "aws_s3_bucket" "warriror_terraform_state" {
   bucket = "team-warriors-web-server-backend-state"
 
