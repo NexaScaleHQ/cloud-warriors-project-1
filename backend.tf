@@ -3,7 +3,7 @@ terraform {
     bucket  = "team-warriors-web-server-backend-state"
     key     = "team-warriors-web-server/development/terraform.tfstate"
     region  = "eu-west-1"
-    encrypt = true
+    encrypt = false
   }
   required_providers {
     aws = {
