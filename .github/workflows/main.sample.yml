@@ -1,76 +1,76 @@
-name: Terraform Workflow
+# name: Terraform Workflow
 
-on:
+# on:
 
-  push:
+#   push:
 
-    branches:
+#     branches:
 
-      - main
+#       - main
 
-  pull_request:
+#   pull_request:
 
-    branches:
+#     branches:
 
-      - main
+#       - main
 
-permissions: read-all
+# permissions: read-all
 
-env:
+# env:
 
-  FORCE_COLOR: 3
+#   FORCE_COLOR: 3
 
-  AWS_REGION: eu-west-1
+#   AWS_REGION: eu-west-1
 
-  TF_KEY: terraform-state.tfstate
+#   TF_KEY: terraform-state.tfstate
 
-jobs:
+# jobs:
 
-  terraform:
+#   terraform:
 
-    name: 'Terraform'
+#     name: 'Terraform'
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
-    steps:
+#     steps:
 
-      - name: Checkout
+#       - name: Checkout
 
-        uses: actions/checkout@v2
+#         uses: actions/checkout@v2
 
-      - name: Setup Terraform
+#       - name: Setup Terraform
 
-        uses: hashicorp/setup-terraform@v1
+#         uses: hashicorp/setup-terraform@v1
 
-      - name: Configure AWS Credentials
+#       - name: Configure AWS Credentials
 
-        uses: aws-actions/configure-aws-credentials@v1
+#         uses: aws-actions/configure-aws-credentials@v1
 
-        with:
+#         with:
 
-          aws-access-key-id: "AKIAWBPQPR5DOM6HKGUP"
+#           aws-access-key-id: "AKIAWBPQPR5DOM6HKGUP"
 
-          aws-secret-access-key: "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"
+#           aws-secret-access-key: "+gCpMoKtP1PQGz0bZ3u/7zk7fjR4/Ak6GpKpVVX+"
 
-          aws-region: "eu-west-1"
+#           aws-region: "eu-west-1"
 
-      - name: Terraform Init
+#       - name: Terraform Init
 
-        run: terraform init -input=false
+#         run: terraform init -input=false
 
-      - name: Terraform Plan
+#       - name: Terraform Plan
 
-        run: terraform plan -input=false
+#         run: terraform plan -input=false
 
-      - name: Terraform Apply
+#       - name: Terraform Apply
 
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+#         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
-        run: terraform apply -auto-approve
+#         run: terraform apply -auto-approve
 
-      # - name: Terraform Destroy
+#       # - name: Terraform Destroy
 
-      #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
+#       #   if: github.event_name == 'pull_request' && github.event.action == 'closed'
 
-      #   run: terraform destroy -auto-approve
+#       #   run: terraform destroy -auto-approve
         

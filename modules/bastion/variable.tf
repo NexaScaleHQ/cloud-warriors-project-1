@@ -6,13 +6,13 @@ variable "algorithm" {
 }
 variable "key_name" {
   type        = string
-  default     = "ngnix-server-key"
-  description = "ngnix-server-key"
+  default     = "bastion"
+  description = "bastion"
 }
 
 variable "filename" {
   type        = string
-  default     = "ngnix-server-key.pem"
+  default     = "bastion.pem"
   description = "private key"
 }
 variable "vpc_id" {}
