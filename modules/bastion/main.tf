@@ -2,7 +2,7 @@
 
 resource "aws_key_pair" "bastion" {
   key_name   = "bastion-key"
-  public_key = file(var.public_key_path)
+  public_key = var.public_key_path
 }
 
 /*** This parameter contains the AMI ID for the most recent Amazon Linux 2 ami,* managed by AWS.*/
