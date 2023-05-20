@@ -1,6 +1,19 @@
 variable "public_subnets" {}
-variable "public_key_path" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCe+5M/ilhxVJbFmQEnvj/50x0r2bU9mHNbbw6UelGsnmYoM7JRnYcCZjK4X4ZeJeZYCP0mLXesTYgCcal8+6pPxyw75wEF0+gnkT5pMYF8eqYPeGAhiZXV6Gc54ewseRgfWNa1Wngt4zO9MC2QbtXOt6SmroMI/SKkO85oiAEMCexSz0g2ihvTvIY4H6hcw7fQOEL7ph5aQESBnSI9Y4oc6vcJpCAbkPP9dgIb7IjabYmG9npVSs7vVokESJxT1CxN+5eXDuVfXg5gjXw0jKpWFHT0AXbcr6cFqHVBCfdnImJOiejeCe3e2+8q2Y+33u6AGvCA+UnBuGAe3ffCl4XXd4DsX1DgNYyfgfbvWgHVVJkYZA8kWLRDTs9EKVg0GeMm3nrfhMpeoJ5Vs8eUwOZl+qx48MktyuVD4MEKTW/dr+qVKUV9K5FVQC8qLWzOr0ApExljzDPVZrDB5yUODNJfrwpGrdaXhLuCrAX1LDDxrZ94cAw43AWb37cR0DjXpTk= destiny erhabor@DESKTOP-4KCMFUR"
+variable "algorithm" {
+  type        = string
+  default     = "RSA"
+  description = "Algorithm"
+}
+variable "key_name" {
+  type        = string
+  default     = "ngnix-server-key-pair"
+  description = "ngnix-server-key-pair"
+}
+
+variable "filename" {
+  type        = string
+  default     = "ngnix-server-key-pair.pem"
+  description = "private key"
 }
 variable "vpc_id" {}
 variable "security_group_bastion_id" {}

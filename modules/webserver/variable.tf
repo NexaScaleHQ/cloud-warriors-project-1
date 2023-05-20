@@ -7,7 +7,21 @@ variable "env_prefix" {
 }
 variable "security_group_allow_web" {}
 # change to your public key path
-variable "public_key_path" {
-  default = "~/.ssh/id_rsa.pub"
+variable "algorithm" {
+  type        = string
+  default     = "RSA"
+  description = "Algorithm"
 }
+variable "key_name" {
+  type        = string
+  default     = "ngnix-server-key-pair"
+  description = "ngnix-server-key-pair"
+}
+
+variable "filename" {
+  type        = string
+  default     = "ngnix-server-key-pair.pem"
+  description = "private key"
+}
+
 variable "public_subnets" {}
