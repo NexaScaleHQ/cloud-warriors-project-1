@@ -44,7 +44,7 @@ module "webserver" {
 }
 module "loadbalancer" {
   source            = "./modules/loadbalancer"
-  instance_ngnix    = module.webserver.instance_ngnix
+  instance_ngnix    = module.webserver.instance_id
   security_group_lb = module.security-groups.security_group_lb
   public_subnets    = module.subnet.public_subnets
   vpc_id            = module.vpc.vpc_id
