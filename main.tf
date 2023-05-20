@@ -52,4 +52,5 @@ module "loadbalancer" {
 
 # module "alarm" {
 #   source = "./modules/alarm"
+#   instance_type = module.webserver.instance_ngnix.id
 # }

@@ -38,3 +38,4 @@ resource "aws_instance" "nginx-instance" {
     Name = "${var.env_prefix}-nginx-instance"
   }
 }
+

@@ -1,3 +1,15 @@
+# terraform {
+#   backend "remote" {
+#     hostname     = "app.terraform.io"
+#     organization = "Simple-Pro"
+
+#     workspaces {
+#       name = "GitHub-actions"
+#     }
+#   }
+# }
+
+
 terraform {
   backend "s3" {
     bucket  = "team-warriors-web-server-backend-state"
@@ -5,10 +17,10 @@ terraform {
     region  = "eu-west-1"
     encrypt = false
   }
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-  }
+#   required_providers {
+#     aws = {
+#       source  = "hashicorp/aws"
+#       version = "~> 4.0"
+#     }
+#   }
 }
